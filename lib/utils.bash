@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for opengrep.
-GH_REPO="https://github.com/hueys/asdf-opengrep"
+GH_REPO="https://github.com/opengrep/opengrep"
 TOOL_NAME="opengrep"
 TOOL_TEST="opengrep --version"
 

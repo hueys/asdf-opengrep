@@ -1,36 +1,43 @@
-# asdf-plugin-template [![Build](https://github.com/asdf-vm/asdf-plugin-template/actions/workflows/build.yml/badge.svg)](https://github.com/asdf-vm/asdf-plugin-template/actions/workflows/build.yml) [![Lint](https://github.com/asdf-vm/asdf-plugin-template/actions/workflows/lint.yml/badge.svg)](https://github.com/asdf-vm/asdf-plugin-template/actions/workflows/lint.yml)
+# asdf-opengrep
 
-This is an [asdf-vm plugin](https://asdf-vm.com/#/plugins-create) template with CI to run [Shellcheck](https://github.com/koalaman/shellcheck) and testing with the [asdf test GitHub Action](https://github.com/asdf-vm/actions).
+[opengrep](https://github.com/opengrep/opengrep) plugin for the [asdf](https://github.com/asdf-vm/asdf) version manager.
 
-## Usage
+## Requirements
+- [bash v5.0](https://www.gnu.org/software/bash/)
+- [curl](https://curl.haxx.se/)
 
-1. [Generate](https://github.com/asdf-vm/asdf-plugin-template/generate) a new repository based on this template.
-1. Clone it and run `bash setup.bash`.
-1. Force push to your repo: `git push --force-with-lease`.
-1. Adapt your code at the TODO markers. To find the markers: `git grep TODO`.
-1. To develop your plugin further, please read [the plugins create section of the docs](https://asdf-vm.com/plugins/create.html).
+## Install
 
->A feature of this plugin-template when hosted on GitHub is the use of [release-please](https://github.com/googleapis/release-please), an automated release tool. It leverages [Conventional Commit messages](https://www.conventionalcommits.org/) to determine semver release type, see the [documentation](https://github.com/googleapis/release-please).
+```
+asdf plugin add opengrep https://github.com/hueys/asdf-opengrep.git
+```
 
-## Contributing
+## Use
 
-Contributions welcome!
+Check [asdf](https://asdf-vm.github.io/asdf/) for instructions on how to install & manage versions of opengrep.
 
-1. Install `asdf` tools
+## Install
 
-    ```shell
-    asdf plugin add shellcheck https://github.com/luizm/asdf-shellcheck.git
-    asdf plugin add shfmt https://github.com/luizm/asdf-shfmt.git
-    asdf install
-    ```
+List opengrep versions:
 
-1. Develop!
+```
+asdf list all opengrep
+```
 
-1. Lint & Format
+Install a candidate listed from the previous command like this:
 
-    ```shell
-    ./scripts/format.bash
-    ./scripts/lint.bash
-    ```
+```
+asdf install opengrep 1.8.2
+```
 
-1. PR changes
+### Setting a version
+
+Select an installed candidate for use like this:
+
+```
+asdf set -u opengrep 1.8.2
+```
+or just for the local directory
+```
+asdf set opengrep 1.8.2
+```

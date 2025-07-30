@@ -71,7 +71,10 @@ download_release() {
         exit 1
     fi
 
-    url="https://github.com/opengrep/opengrep/releases/download/${VERSION}/${DIST}"
+    echo "VERSION = ${version}"
+    echo "DIST = ${DIST}"
+
+    url="https://github.com/opengrep/opengrep/releases/download/${version}/${DIST}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"

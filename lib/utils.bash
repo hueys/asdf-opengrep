@@ -91,7 +91,8 @@ install_version() {
 		echo "download path: ${ASDF_DOWNLOAD_PATH}"
 
 		mkdir -p "$install_path"
-		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+		cp "${ASDF_DOWNLOAD_PATH}/opengrep" "${install_path}/opengrep"
+		chmod +x "${install_path}/opengrep"
 
 		# Assert opengrep executable exists.
 		local tool_cmd

@@ -71,9 +71,6 @@ download_release() {
         exit 1
     fi
 
-    echo "VERSION = ${version}"
-    echo "DIST = ${DIST}"
-
     url="https://github.com/opengrep/opengrep/releases/download/v${version}/${DIST}"
 
 	echo "* Downloading $TOOL_NAME release $version..."

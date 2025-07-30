@@ -40,38 +40,38 @@ download_release() {
 	filename="$2"
 
 	OS="${OS:-$(uname -s)}"
-    ARCH="${ARCH:-$(uname -m)}"
-    DIST=""
+	ARCH="${ARCH:-$(uname -m)}"
+	DIST=""
 
 	# check and set "os_arch"
-    if [ "$OS" = "Linux" ]; then
-        if ldd /bin/sh 2>&1 | grep -qi musl; then
-            if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
-                DIST="opengrep_musllinux_x86"
-            elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
-                DIST="opengrep_musllinux_aarch64"
-            fi
-        else
-            if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
-                DIST="opengrep_manylinux_x86"
-            elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
-                DIST="opengrep_manylinux_aarch64"
-            fi
-        fi
-    elif [ "$OS" = "Darwin" ]; then
-        if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
-            DIST="opengrep_osx_x86"
-        elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
-            DIST="opengrep_osx_arm64"
-        fi
-    fi
+	if [ "$OS" = "Linux" ]; then
+		if ldd /bin/sh 2>&1 | grep -qi musl; then
+			if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
+				DIST="opengrep_musllinux_x86"
+			elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+				DIST="opengrep_musllinux_aarch64"
+			fi
+		else
+			if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
+				DIST="opengrep_manylinux_x86"
+			elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+				DIST="opengrep_manylinux_aarch64"
+			fi
+		fi
+	elif [ "$OS" = "Darwin" ]; then
+		if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
+			DIST="opengrep_osx_x86"
+		elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+			DIST="opengrep_osx_arm64"
+		fi
+	fi
 
-    if [ -z "${DIST}" ]; then
-        echo "Operating system '${OS}' / architecture '${ARCH}' is unsupported." 1>&2
-        exit 1
-    fi
+	if [ -z "${DIST}" ]; then
+		echo "Operating system '${OS}' / architecture '${ARCH}' is unsupported." 1>&2
+		exit 1
+	fi
 
-    url="https://github.com/opengrep/opengrep/releases/download/v${version}/${DIST}"
+	url="https://github.com/opengrep/opengrep/releases/download/v${version}/${DIST}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"

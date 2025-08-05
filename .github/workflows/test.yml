@@ -38,7 +38,7 @@ jobs:
       - name: Test download and install specific version
         run: |
           # Test with a known good version
-          test_version="1.1.5"
+          test_version="1.8.3"
           asdf install opengrep $test_version
           asdf global opengrep $test_version
           opengrep --version
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ["1.1.5", "1.1.4"]
+        version: ["1.8.3", "1.8.2"]
     steps:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7

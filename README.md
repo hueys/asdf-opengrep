@@ -37,19 +37,19 @@ asdf list all opengrep
 Install a specific version:
 
 ```bash
-asdf install opengrep 1.1.5
+asdf install opengrep 1.8.3
 ```
 
 Set global version:
 
 ```bash
-asdf global opengrep 1.1.5
+asdf global opengrep 1.8.3
 ```
 
 Set local version for current directory:
 
 ```bash
-asdf local opengrep 1.1.5
+asdf local opengrep 1.8.3
 ```
 
 Verify installation:

@@ -46,8 +46,8 @@ download_release() {
 
 	# Normalize architecture names
 	case "$ARCH" in
-		amd64) ARCH="x86_64" ;;
-		arm64) ARCH="aarch64" ;;
+	amd64) ARCH="x86_64" ;;
+	arm64) ARCH="aarch64" ;;
 	esac
 
 	# check and set "os_arch"
@@ -55,22 +55,22 @@ download_release() {
 		# Check if system uses musl libc
 		if command -v ldd >/dev/null 2>&1 && ldd /bin/sh 2>&1 | grep -qi musl; then
 			case "$ARCH" in
-				x86_64) DIST="opengrep_musllinux_x86" ;;
-				aarch64) DIST="opengrep_musllinux_aarch64" ;;
-				*) ;;
+			x86_64) DIST="opengrep_musllinux_x86" ;;
+			aarch64) DIST="opengrep_musllinux_aarch64" ;;
+			*) ;;
 			esac
 		else
 			case "$ARCH" in
-				x86_64) DIST="opengrep_manylinux_x86" ;;
-				aarch64) DIST="opengrep_manylinux_aarch64" ;;
-				*) ;;
+			x86_64) DIST="opengrep_manylinux_x86" ;;
+			aarch64) DIST="opengrep_manylinux_aarch64" ;;
+			*) ;;
 			esac
 		fi
 	elif [ "$OS" = "Darwin" ]; then
 		case "$ARCH" in
-			x86_64) DIST="opengrep_osx_x86" ;;
-			aarch64) DIST="opengrep_osx_arm64" ;;
-			*) ;;
+		x86_64) DIST="opengrep_osx_x86" ;;
+		aarch64) DIST="opengrep_osx_arm64" ;;
+		*) ;;
 		esac
 	fi
 
@@ -109,7 +109,7 @@ install_version() {
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
 		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
-		
+
 		# Test that the binary actually works
 		if ! "$install_path/$tool_cmd" --version >/dev/null 2>&1; then
 			fail "$tool_cmd binary is not working correctly. This might be due to missing dependencies or architecture mismatch."

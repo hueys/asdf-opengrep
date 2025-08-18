@@ -21,7 +21,7 @@ jobs:
 
       - name: Test plugin
         run: |
-          asdf plugin test opengrep $GITHUB_WORKSPACE "opengrep --version"
+          asdf plugin test opengrep "$GITHUB_WORKSPACE" "opengrep --version"
 
       - name: Test latest stable
         run: |
@@ -42,7 +42,7 @@ jobs:
           asdf install opengrep $test_version
           asdf global opengrep $test_version
           opengrep --version
-          
+
           # Verify the version is correctly installed
           installed_version=$(opengrep --version | head -n1)
           echo "Installed version output: $installed_version"
@@ -61,7 +61,7 @@ jobs:
 
       - name: Test specific version ${{ matrix.version }}
         run: |
-          asdf plugin add opengrep $GITHUB_WORKSPACE
+          asdf plugin add opengrep "$GITHUB_WORKSPACE"
           asdf install opengrep ${{ matrix.version }}
           asdf global opengrep ${{ matrix.version }}
           opengrep --version

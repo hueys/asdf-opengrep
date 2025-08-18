@@ -17,13 +17,22 @@ fi
 # curl of REPO/releases/latest is expected to be a 302 to another URL
 # when no releases redirect_url="REPO/releases"
 # when there are releases redirect_url="REPO/releases/tag/v<VERSION>"
-redirect_url=$(curl "${curl_opts[@]}" "$GH_REPO/releases/latest" | sed -n -e "s|^location: *||p" | sed -n -e "s|\r||p")
-version=
-printf "redirect url: %s\n" "$redirect_url" >&2
-if [[ "$redirect_url" == "$GH_REPO/releases" ]]; then
+redirect_url=$(curl "${curl_opts[@]}" "$GH_REPO/releases/latest" 2>/dev/null | sed -n -e "s|^location: *||p" | sed -n -e "s|\r||p")
+
+if [[ -z "$redirect_url" ]]; then
+	# Fallback to parsing all versions if redirect fails
+	version="$(list_all_versions | sort_versions | tail -n1 | xargs echo)"
+elif [[ "$redirect_url" == "$GH_REPO/releases" ]]; then
+	# No releases found, get latest from all versions
 	version="$(list_all_versions | sort_versions | tail -n1 | xargs echo)"
 else
+	# Extract version from redirect URL
 	version="$(printf "%s\n" "$redirect_url" | sed 's|.*/tag/v\{0,1\}||')"
+fi
+
+if [[ -z "$version" ]]; then
+	echo "Error: Could not determine latest version" >&2
+	exit 1
 fi
 
 printf "%s\n" "$version"

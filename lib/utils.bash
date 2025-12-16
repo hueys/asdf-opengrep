@@ -32,7 +32,7 @@ list_all_versions() {
 }
 
 download_release() {
-	local version filename url
+	local version filename url tag
 	version="$1"
 	filename="$2"
 
@@ -80,7 +80,16 @@ download_release() {
 		exit 1
 	fi
 
-	url="https://github.com/opengrep/opengrep/releases/download/v${version}/${DIST}"
+	# Check if the tag exists with or without 'v' prefix
+	if git ls-remote --tags --refs "$GH_REPO" | grep -q "refs/tags/v${version}$"; then
+		tag="v${version}"
+	elif git ls-remote --tags --refs "$GH_REPO" | grep -q "refs/tags/${version}$"; then
+		tag="${version}"
+	else
+		fail "Could not find tag for version $version in $GH_REPO"
+	fi
+
+	url="https://github.com/opengrep/opengrep/releases/download/${tag}/${DIST}"
 
 	echo "* Downloading $TOOL_NAME release $version for ${OS}/${ARCH}..."
 	echo "* Download URL: $url"
